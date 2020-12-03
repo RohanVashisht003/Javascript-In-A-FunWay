@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keys</title>
+</head>
+<style>
+    * {
+        padding: 0px;
+        margin: 0px;
+    }
+
+    body {
+        background: url('https://i.imgur.com/b9r5sEL.jpg');
+    }
+
+    .heading{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+       padding-top: 12px;
+       background: rgba(233, 77, 16);
+       margin-top: 4px;
+    }
+
+    .text{
+        color: white;
+        font-size: 23px;
+    }
+
+    .keys {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 80vh;
+    }
+
+    .key {
+        margin: 2rem;
+        text-align: center;
+        border: 3px solid black;
+        padding: 1rem .1rem;
+        font-size: 1rem;
+        color: white;
+        width: 100px;
+        background: rgba(0, 0, 0, 0.8);
+        transition: all .09s ease;
+    }
+
+    .playing {
+        transform: scale(1.5);
+        border-color: #ffc600;
+        box-shadow: 0 0 1rem #ffc600;
+    }
+
+
+    .sound {
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: .1rem;
+        color: #ffc600;
+    }
+
+    kbd {
+        font-size: 5rem;
+        display: block;
+
+    }
+</style>
+
+<body>
+    <div class="heading">
+        <em class="text">Press Mentioned Keys</em>
+    </div>
+    <div class="keys">
+        <div data-key="65" class="key"><kbd>A</kbd><span class="sound">Clap</span></div>
+        <div data-key="66" class="key"><kbd>B</kbd><span class="sound">Kick</span></div>
+        <div data-key="67" class="key"><kbd>C</kbd><span class="sound">Hat</span></div>
+        <div data-key="68" class="key"><kbd>D</kbd><span class="sound">Loud</span></div>
+        <div data-key="69" class="key"><kbd>E</kbd><span class="sound">Drum</span></div>
+        <div data-key="70" class="key"><kbd>F</kbd><span class="sound">Guitar</span></div>
+    </div>
+    <audio data-key="65" src="/sounds/clap.wav"></audio>
+    <audio data-key="66" src="/sounds/kick.wav"></audio>
+    <audio data-key="67" src="/sounds/openhat.wav"></audio>
+    <audio data-key="68" src="/sounds/boom.wav"></audio>
+    <audio data-key="69" src="/sounds/ride.wav"></audio>
+    <audio data-key="70" src="/sounds/tom.wav"></audio>
+
+    <script>
+        window.addEventListener('keydown', function (e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+            audio.currentTime = 0;
+            audio.play();
+            key.classList.add('playing');
+        });
+
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            this.classList.remove('playing');
+        }
+
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+
+
+    </script>
+</body>
+
+</html>
