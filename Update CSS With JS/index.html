@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update CSS Variables</title>
+</head>
+<body>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+
+        :root{
+            --base:#ffc600;
+            --spacing: 0px;
+            --blur:0px;
+        }
+
+        img{
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur));
+        }
+
+        body{
+            text-align: center;
+            background: rgb(36, 24, 146);
+            font-family: cursive, Arial;
+            font-weight: 100;
+            font-size: 40px;
+            color: white;
+        }
+
+        .container{
+            margin-bottom: 5%;
+        }
+
+        .hl{
+            color:var(--base);
+        }
+    </style>
+    <h2>Update Css Variables With <span class="hl">JS</span></h2>
+    <div class="container">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" min="0" max="40" value="0" data-sizing="px" >
+
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" min="0" max="40" value="0" data-sizing="px">
+
+        <label for="base">Base Colour</label>
+        <input type="color" name="base" value="#ffc600" data-sizing="">
+    </div>
+    <img src="https://images.unsplash.com/photo-1520275720895-a5dc86efbfce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80" alt="" height="450px" width="1000px">
+
+    <script>
+        const inputs=document.querySelectorAll('.container input');
+
+        function handleUpdate(){
+            suffix = this.dataset.sizing;
+            document.documentElement.style.setProperty(`--${this.name}`,this.value+suffix);
+            
+        }
+        inputs.forEach(input=> input.addEventListener('change',handleUpdate));
+        inputs.forEach(input=> input.addEventListener('mousemove',handleUpdate));
+    </script>
+</body>
+</html>
