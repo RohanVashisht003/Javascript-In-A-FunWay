@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Type Ahead</title>
+</head>
+
+<body>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            align-items: center;
+            text-align: center;
+            padding: 13px;
+            font-weight: 200;
+            font-size: 26px;
+            background-image: url(https://images.unsplash.com/photo-1607034540403-160de28afe78?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+
+        input {
+            font-size: 100%;
+            padding: 20px;
+
+        }
+
+        .search-form {
+            max-width: 400px;
+            margin: 50px auto;
+
+        }
+
+        input.search {
+            margin: 0px;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.12), inset 0 0 2px rgba(0, 0, 0, 0.19);
+            text-align: center;
+            outline: 0;
+            border: 6px solid #F7F7F7;
+            width: 120%;
+            left: -10%;
+            position: relative;
+            top: 10px;
+            z-index: 2;
+            border-radius: 5px;
+            font-size: 40px;
+        }
+
+        .suggestions {
+            margin: 10%;
+            position: relative;
+        }
+
+        .suggestions li {
+            background: white;
+            list-style: none;
+            border-bottom: 1px solid #D8D8D8;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.14);
+            padding: 20px;
+            transition: background 0.2s;
+            display: flex;
+            justify-content: space-between;
+            text-transform: capitalize;
+        }
+
+        .suggestions li:nth-child(even) {
+            transform: perspective(100px) rotateX(3deg) translateY(2px) scale(1.001);
+            background: linear-gradient(to bottom, #ffffff 0%, #a5a5a5 100%);
+        }
+
+        .suggestions li:nth-child(odd) {
+            transform: perspective(100px) rotateX(-3deg) translateY(1px) scale(1.001);
+            background: linear-gradient(to bottom, #ffffff 0%, #a5a5a5 100%);
+        }
+
+        span.population {
+            font-size: 13px;
+        }
+
+        .hl {
+            background-color: tomato;
+        }
+    </style>
+
+    <h1 style="color: rgb(255, 255, 255);">Search Here</h1>
+    <form class="search-form">
+        <input type="text" class="search" placeholder="City Or State Name">
+
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>Or a state</li>
+        </ul>
+    </form>
+    <script>
+        const endPoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+        const cities = [];
+
+        fetch(endPoint)
+            .then(bl => bl.json())
+            .then(data => cities.push(...data));
+
+        function findMatches(wordToMatch, cities) {
+            return cities.filter(place => {
+                const regex = new RegExp(wordToMatch, 'gi');
+                return (place.city.match(regex) || place.state.match(regex));
+            });
+        }
+
+        function numberWithCommas(x) {
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
+
+        function displayMatches() {
+            const matchArray = findMatches(this.value, cities);
+            const html = matchArray.map(place => {
+                const regex = new RegExp(this.value, 'gi');
+                const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+                const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
+                return `
+               <li>
+               <span class="name">${cityName},${stateName}</span>
+               <span class="population">${numberWithCommas(place.population)}</span>
+               </li>
+                 `;
+            }).join('');
+            suggestions.innerHTML = html;
+        }
+
+        const searchInput = document.querySelector('.search');
+        const suggestions = document.querySelector('.suggestions');
+
+        searchInput.addEventListener('change', displayMatches);
+        searchInput.addEventListener('keyup', displayMatches);
+
+    </script>
+</body>
+
+</html>
