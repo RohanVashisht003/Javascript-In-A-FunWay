@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flex Image Gallery </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+    <style>
+        * {
+            margin: 0%;
+            padding: 0%;
+        }
+
+        html {
+            box-sizing: border-box;
+            background: #ebcf6b;
+            font-family: 'Nerko One', cursive;
+            font-size: 20px;
+            font-weight: 200;
+        }
+
+        .panels {
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .panel {
+            color: rgba(255, 255, 255, 0.938);
+            text-align: center;
+            align-items: center;
+
+            transition:
+                font-size 0.7s cubic-bezier(0.075, 0.82, 0.165, 1),
+                flex-grow 0.7s cubic-bezier(0.075, 0.82, 0.165, 1),
+                background 0.7s;
+            font-size: 20px;
+            background-size: cover;
+            background-position: center;
+            /* border: 1px solid red; */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-1 {
+            background-image: url(https://source.unsplash.com/gYl-UtwNg_I/1500x1500);
+        }
+
+        .panel-2 {
+            background-image: url(https://images.unsplash.com/photo-1607073314765-454a855653fb?ixid=MXwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw4fHx8ZW58MHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=60);
+        }
+
+        .panel-3 {
+            background-image: url(https://images.unsplash.com/photo-1465188162913-8fb5709d6d57?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&cs=tinysrgb&w=1500&h=1500&fit=crop&s=967e8a713a4e395260793fc8c802901d);
+        }
+
+        .panel-4 {
+            background-image: url(https://images.unsplash.com/photo-1607025820327-c8d2cee345a8?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80);
+        }
+
+        .panel-5 {
+            background-image: url(https://source.unsplash.com/3MNzGlQM7qs/1500x1500);
+        }
+
+        .panel>* {
+            margin: 0;
+            width: 100%;
+            transition: transform 0.2s;
+            /* border: 1px solid red; */
+            flex: 1 0 auto;
+            justify-content: center;
+            display: flex;
+        }
+
+        .panel>*:first-child {
+            transform: translateY(-100%);
+            color: rgb(231, 129, 56);
+        }
+
+        .panel.open-active>*:first-child {
+            transform: translateY(0);
+        }
+
+        .panel>*:last-child {
+            transform: translateY(100%);
+            color: rgb(231, 129, 56);
+        }
+
+        .panel.open-active>*:last-child {
+            transform: translateY(0);
+        }
+
+        .panel.open {
+            flex-grow: 10;
+            font-size: 40px;
+
+        }
+    </style>
+
+    <div class="panels">
+        <div class="panel panel-1">
+            <p>Hey</p>
+            <p>Let's</p>
+            <p>Explore</p>
+        </div>
+        <div class="panel panel-2">
+            <p>Code</p>
+            <p>Sleep</p>
+            <p>Eat</p>
+        </div>
+        <div class="panel panel-3">
+            <p>Always</p>
+            <p>Live</p>
+            <p>To Fullest</p>
+        </div>
+        <div class="panel panel-4">
+            <p>Give</p>
+            <p>All</p>
+            <p>You Can</p>
+        </div>
+        <div class="panel panel-5">
+            <p>Life</p>
+            <p>In</p>
+            <p>Motion</p>
+        </div>
+    </div>
+
+    <script>
+        const panels = document.querySelectorAll('.panel');
+
+        function toggleOpen() {
+            this.classList.toggle('open');
+        }
+
+        panels.forEach(panel => panel.addEventListener('click', toggleOpen));
+
+        function toggleActive(e) {
+            if (e.propertyName === 'flex-grow') {
+                this.classList.toggle('open-active');
+            }
+        }
+        panels.forEach(panel => panel.addEventListener('transitionend', toggleActive));
+    </script>
+</body>
+
+</html>
