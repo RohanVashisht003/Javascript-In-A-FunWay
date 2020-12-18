@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Video Player</title>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="player">
+            <video class="player__video viewer"
+                src="https://redirector.googlevideo.com/videoplayback?expire=1608323419&ei=-7zcX9XYKteL2_gP2Ius8AY&ip=64.187.236.39&id=o-AHworZXjsG0SiUILsFY0XFPttS7eb8S88EkHc9jRIqu3&itag=18&source=youtube&requiressl=yes&mh=MK&mm=31%2C26&mn=sn-vgqsknek%2Csn-tt1eln7e&ms=au%2Conr&mv=m&mvi=4&pl=21&initcwndbps=4587500&vprv=1&mime=video%2Fmp4&ns=ISqLqV-LtMTfZdpSDpfyrrsF&gir=yes&clen=13091438&ratebypass=yes&dur=177.307&lmt=1580742539865155&mt=1608301492&fvip=4&c=MWEB&txp=5531432&n=Yi5Z2Fbhrx-Hossy4&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cvprv%2Cmime%2Cns%2Cgir%2Cclen%2Cratebypass%2Cdur%2Clmt&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&lsig=AG3C_xAwRAIgNRLwddlPgDBrJFMgTAtHT8CyfYqEEz4AMNS1wvSrkLwCIDEmd2dbMKBqzCzkcMiwIEp4PLqPGiZ7KGA_eeAHWSvG&sig=AOq0QJ8wRAIgEIRszNfTMkigjFNP2SzouyAZC1hKT3Ic3_FHyg7z2xcCIC4js2wP9tLHYX_Qg1pMjS66Zo_4iN82Lm935giAFt4S&utmg=ytap1_1nydxbGhgv8"></video>
+            <div class="player__controls">
+                <div class="progress">
+                    <div class="progress__filled"></div>
+                </div>
+                <div class="buttons">
+                    <button id="play-pause"></button>
+                    <input type="range" name="volume" class="player__slider" min=0 max="1" step="0.05" value="0.5">
+                    <input type="range" name="playbackRate" class="player__slider" min="0.5" max="2" step="0.1"
+                        value="1">
+
+                    <button data-skip="-10" class="player-button">
+                        << 10s</button>
+                            <button data-skip="10" class="player-button">
+                                10s >></button> 
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

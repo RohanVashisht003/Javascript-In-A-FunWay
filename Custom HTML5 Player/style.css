@@ -1,0 +1,100 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: rgb(235, 144, 39);
+}
+
+.player {
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  overflow: hidden;
+}
+
+.player:hover.controls {
+  transform: translateY(0);
+}
+
+.player__video {
+  width: 100%;
+}
+
+.player__controls {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  flex-wrap: wrap;
+  transform: translateY(100%) translateY(-5px);
+  transition: all 0.3s;
+  background-color: rgba(22, 20, 20, 0.795);
+}
+
+.buttons #play-pause {
+  background: none;
+  border: 0;
+  outline: 0;
+  cursor: pointer;
+  padding: 5px 5px;
+}
+
+.buttons #play-pause:before {
+  content: "\f144";
+  font-family: "Font Awesome 5 Free";
+  width: 30px;
+  height: 30px;
+  color: white;
+  font-size: 25px;
+  display: inline-block;
+}
+
+.buttons #play-pause.play:before {
+  content: "\f144";
+}
+
+.buttons #play-pause.pause:before {
+  content: "\f28b";
+}
+
+.player:hover .player__controls {
+  transform: translateY(0);
+}
+
+.progress {
+  height: 5px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(231, 225, 225, 0.219);
+}
+
+.progress__filled {
+  width: 0%;
+  height: 10px;
+  background-color: orangered;
+}
+
+input[type="range"] {
+  background: transparent;
+  margin: 0px 6px;
+  cursor: pointer;
+  border-radius: 20px;
+  width: 20%;
+  outline: none;
+  
+}
+
+.player-button{
+  background: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 9px;
+}
